@@ -1,22 +1,22 @@
 import tkinter
 
 def convert():
+    conversion_constant = (60 / 59.7275)
     run = time.get()
-    h = int(run[0])
-    m = int(run[2:4])
-    s = int(run[5:7])
-    ms = int(run[8:10])
+    h = int(run.split(':')[0])
+    m = int(run.split(':')[1])
+    s = int(run.split(':')[2].split('.')[0])
+    ms = int(run.split('.')[1])
 
-    original = h * 3600 + m * 60 + s + (ms / 100)
+    original = h * 3600 + m * 60 + s + (ms / 1000)
 
-    converted = original * (60 / 59.7275)
-    converted = round(converted, 2)
+    converted = round(original * conversion_constant, 3)
 
     newtime = str(converted)
 
-    newms = int(newtime[5:7])
+    newms = int(newtime.split('.')[1])
 
-    newseconds = int(newtime[0:4])
+    newseconds = int(newtime.split('.')[0])
     news = newseconds % 60
     newseconds -= news
 
@@ -27,7 +27,7 @@ def convert():
     newh /= 3600
     newh = int(newh)
 
-    newtime = str(newh) + ":" + str(newm) + ":" + str(news) + "." + str(newms)
+    newtime = f'{newh}:{newm:02d}:{news:02d}.{newms:03d}'
     convertedtime.set(newtime)
 
 w = tkinter.Tk()
@@ -38,7 +38,7 @@ convertedtime = tkinter.StringVar()
 w.title("Switch to GBA Time Converter")
 
 timelabel = tkinter.Label(w, text='Initial Time', font=('arial', 16, 'normal'))
-timeentry = tkinter.Entry(w, textvariable=time, font=('arial', 16, 'normal'))
+timeentry = tkinter.Entry(w,textvariable=time,font=('arial', 16, 'normal'))
 convertedtimelabel = tkinter.Label(w, text='Converted Time', font=('arial', 16, 'normal'))
 convertedtimeentry = tkinter.Entry(w, textvariable=convertedtime, font=('arial', 16, 'normal'))
 button = tkinter.Button(w, text="Convert", width=16, command=convert)
