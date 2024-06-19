@@ -4,4 +4,4 @@ The original Game Boy Advance runs games at 59.7275 frames per second. This is t
 
 # How to run
 
-Click the '<> Code' button and download the repository as a ZIP file. Extract the ZIP file, and run the 'switchgbaconverter.py' script. Enter the Switch Online time into the 'Initial Time' textbox and hit convert. The accurately converted time will be printed in the 'Converted Time' textbox. This is the time that would be submitted to a leaderboard.
+Download the convert.exe program from the Releases section.
