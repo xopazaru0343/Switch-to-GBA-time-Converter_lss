@@ -6,3 +6,7 @@ The original Game Boy Advance runs games at 59.7275 frames per second. This is t
 
 Download the convert.exe program from the Releases section. 
 Enter a run time with the following format into the Initial Time box: ``H:MM:SS.CS``. The output will then be the accurate time of the run.
+
+# Modifications 
+
+This fork converts a whole .lss file instead of a single individual time you type out,do mind that the filename it points out to is "hardcoded", but you can change it to your lss filename
