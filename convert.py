@@ -60,7 +60,7 @@ for i in range(len(float7_brute)):
 
 for i in range(len(float7_formatted)): 
     a = float7_formatted[i] 
-    text = re.sub(float7_formatted[i], a[0: 12], text) 
+    text = re.sub(float7_formatted[i], a[0: 12] + '0000', text) 
 
 f.write(text) 
 f.close() 
