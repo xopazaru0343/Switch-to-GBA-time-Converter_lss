@@ -30,7 +30,8 @@ def convert(timef):
     newtime = f'{newh:02d}:{newm:02d}:{news:02d}.{newms:03d}' 
     return newtime 
     
-f = open('Metroid Zero Mission - Any_ (Easy).lss', 'r+', encoding="utf-8") 
+f = open('Metroid Zero Mission - Any_ (Easy).lss', 'r+', encoding="utf-8")
+nf = open('tempfileconvert', 'w')
 
 # Time conversion
 
@@ -50,19 +51,35 @@ for i in range(len(base_times)):
 for i in range(len(converted_times)): 
     text = re.sub(base_times[i], converted_times[i], text)  
 
-# Time formatting
-
-pattern2 = r"([0-9]{2}:[0-9]{2}:[0-9]{2})(\.[0-9]{1,7})" 
-float7_brute = re.findall(pattern2, text)
-float7_formatted = []
-for i in range(len(float7_brute)):
-    float7_formatted.append(re.sub(r"[\s,')(]", '', str(float7_brute[i]))) 
-
-for i in range(len(float7_formatted)): 
-    a = float7_formatted[i] 
-    text = re.sub(float7_formatted[i], a[0: 12] + '0000', text) 
-
-f.write(text) 
+# Gambiarra/Workaround
 f.close() 
-print(text)
+f2 = open('Metroid Zero Mission - Any_ (Easy).lss', 'r+', encoding="utf-8")
+lines = f2.readlines()
+index_ct = 0 
+for line in lines: 
+    nf.write(line)
+    if (line.lstrip()).startswith('<RealTime>'): 
+        nf.write(" " * line.count(" ") + f"<GameTime>{converted_times[index_ct]}0000</GameTime>\n")
+        if index_ct < len(converted_times) - 1:
+            index_ct += 1
+f2.close() 
+nf.close()
 
+# Writing the changes
+f = open('Metroid Zero Mission - Any_ (Easy).lss', 'w', encoding="utf-8")
+f2 = open('tempfileconvert', 'r')
+text = f2.read()
+f.write(text)
+f.close()
+f2.close()
+
+
+
+# Debugger de pobre
+#f.write(text) 
+#f.close() 
+#print(text)
+#print(base_times)
+#print(converted_times)
+#print(float7_formatted)
+#print(lines)
