@@ -31,7 +31,7 @@ def convert(timef):
     return newtime 
     
 f = open('Metroid Zero Mission - Any_ (Easy).lss', 'r+', encoding="utf-8")
-nf = open('tempfileconvert', 'w')
+nf = open('input.lss', 'w', encoding="utf-8")
 
 # Time conversion
 
@@ -67,7 +67,7 @@ nf.close()
 
 # Writing the changes
 f = open('Metroid Zero Mission - Any_ (Easy).lss', 'w', encoding="utf-8")
-f2 = open('tempfileconvert', 'r')
+f2 = open('input.lss', 'r')
 text = f2.read()
 f.write(text)
 f.close()
